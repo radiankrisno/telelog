@@ -11,7 +11,10 @@
     "url": "git+https://github.com/radiankrisno/telelog.git"
   },
   "keywords": [
-    "telelog"
+    "telelog",
+    "telegram",
+    "logger",
+    "node"
   ],
   "author": "radiankrisno",
   "license": "ISC",
