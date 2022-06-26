@@ -1,6 +1,6 @@
 {
   "name": "telelog",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Telegram logger built in Node.js",
   "main": "index.js",
   "scripts": {

@@ -34,19 +34,22 @@ class Telelog {
   }
 
   static getLogFileAndLine() {
-    const { stack } = new Error('');
-    const stackArray = stack.split('\n');
-    const stackMessage = stackArray[3];
-    const caller = stackMessage.match(/\(.*\)/)[0];
-    const logFileAndLine = caller.substring(caller.lastIndexOf(path.sep) + 1, caller.length - 1);
-    return logFileAndLine;
+    try {
+      const { stack } = new Error('');
+      const stackArray = stack.split('\n');
+      const stackMessage = stackArray[3];
+      const caller = stackMessage.match(/\(.*\)/)[0];
+      const logFileAndLine = caller.substring(caller.lastIndexOf(path.sep) + 1, caller.length - 1);
+      return logFileAndLine;
+    } catch (err) {
+      return '';
+    }
   }
 
   createParams(message) {
     const params = {
       chat_id: this.chatId,
       text: message,
-      parse_mode: 'HTML',
     };
     return params;
   }
@@ -57,7 +60,7 @@ class Telelog {
   }
 
   processor(type, logFileAndLine, args) {
-    const message = `<b>${type}</b> ${new Date(Date.now()).toLocaleDateString()} ${logFileAndLine} \n\n ${args.join(' ')}`;
+    const message = `${type} ${new Date(Date.now()).toLocaleDateString()} ${logFileAndLine} \n\n ${args.join(' ')}`;
     this.sendMessage(message);
   }
 
